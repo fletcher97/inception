@@ -1,0 +1,103 @@
+services:
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - 443:443
+    restart: always
+    build:
+      context: requirements/nginx
+      args:
+        - LOGIN
+    volumes:
+      - wp_content:/var/www/html
+    depends_on:
+      - wordpress
+    networks:
+      - fltnet
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    build:
+      context: requirements/mariadb
+      args:
+        - DB_NAME
+        - DB_USER
+        - DB_PASS
+    volumes:
+      - wp_db:/var/lib/mysql
+    networks:
+      - fltnet
+
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    restart: always
+    build:
+      context: requirements/wordpress
+      args:
+        - WP_CLI_DL
+    environment:
+      - DB_HOST
+      - DB_NAME
+      - DB_USER
+      - DB_PASS
+      - WP_TITLE
+      - WP_URL
+      - WP_ADMIN_USER
+      - WP_ADMIN_EMAIL
+      - WP_ADMIN_PASS
+      - WP_USER
+      - WP_PASS
+      - WP_EMAIL
+    depends_on:
+      - mariadb
+    volumes:
+      - wp_content:/var/www/html
+    networks:
+      - fltnet
+
+#  portainer:
+#    container_name: portainer
+#    image: portainer
+#    restart: always
+#    build:
+#      context: requirements/portainer
+#      args:
+#        - ALPINE_VERSION=$ALPINE_VERSION
+#        - LOGIN=$LOGIN
+#        - PORTAINER_GIT=$PORTAINER_GIT
+#    ports:
+#      - 9443:9443
+#    networks:
+#      - fltnet
+
+volumes:
+  portainer_data:
+    name: protainer_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fletcher/data/portainer_data
+  wp_db:
+    name: wp_db
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fletcher/data/wp_db
+  wp_content:
+    name: wp_content
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fletcher/data/wp_content
+
+networks:
+  fltnet:
+    name: fltnet
