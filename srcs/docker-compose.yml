@@ -11,7 +11,7 @@ services:
       args:
         - LOGIN
     volumes:
-      - wp_content:/var/www/html
+      - wp_content:/var/www/html/wordpress
     depends_on:
       - wordpress
     networks:
@@ -56,7 +56,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wp_content:/var/www/html
+      - wp_content:/var/www/html/wordpress
     networks:
       - fltnet
 
