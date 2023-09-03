@@ -18,6 +18,8 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 RUN sed -i "s/ssl_protocols TLSv1.1/ssl_protocols/g" /etc/nginx/nginx.conf
 COPY conf/wordpress.conf /etc/nginx/http.d/wordpress.conf
 RUN sed -i "s/LOGIN/${LOGIN}/g" /etc/nginx/http.d/wordpress.conf
+COPY conf/adminer.conf /etc/nginx/http.d/adminer.conf
+RUN sed -i "s/LOGIN/${LOGIN}/g" /etc/nginx/http.d/adminer.conf
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log

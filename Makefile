@@ -12,6 +12,7 @@ down:
 
 build:
 	mkdir -p ~/data/wp_content
+	mkdir -p ~/data/adminer_content
 	mkdir -p ~/data/wp_db
 	docker compose ${ENV_FILE} ${FILE} build
 

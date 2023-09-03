@@ -5,6 +5,7 @@ services:
     image: nginx
     ports:
       - 443:443
+      - 8080:8080
     restart: always
     build:
       context: requirements/nginx
@@ -60,6 +61,21 @@ services:
     networks:
       - fltnet
 
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    build:
+      context: requirements/adminer
+      args:
+        - ADMINER_VERSION
+    depends_on:
+      - mariadb
+    volumes:
+      - adminer_content:/var/www/html/adminer
+    networks:
+      - fltnet
+
 #  portainer:
 #    container_name: portainer
 #    image: portainer
@@ -97,6 +113,14 @@ volumes:
       type: none
       o: bind
       device: /home/fletcher/data/wp_content
+  adminer_content:
+    name: adminer_content
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fletcher/data/adminer_content
+
 
 networks:
   fltnet:
