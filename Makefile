@@ -5,18 +5,18 @@ all: build
 all: up
 
 up:
-	docker compose ${ENV_FiLE} ${FILE} up -d
+	docker compose ${ENV_FILE} ${FILE} up -d
 
 down:
-	docker compose ${ENV_FiLE} ${FILE} down
+	docker compose ${ENV_FILE} ${FILE} down
 
 build:
 	mkdir -p ~/data/wp_content
 	mkdir -p ~/data/wp_db
-	docker compose ${ENV_FiLE} ${FILE} build
+	docker compose ${ENV_FILE} ${FILE} build
 
 logs:
-	docker compose ${ENV_FiLE} ${FILE} logs -f
+	docker compose ${ENV_FILE} ${FILE} logs -f
 
 clean: down
 	docker system prune -af
