@@ -25,5 +25,4 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Start nginx on foreground
-# CMD ["tail", "-f", "/dev/null"]
 CMD [ "nginx", "-g", "daemon off;" ]

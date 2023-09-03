@@ -25,5 +25,4 @@ RUN adduser -u 82 -D -S -G www-data www-data
 # Expose WordPress's port
 EXPOSE 9000
 
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
 CMD ["./script.sh"]
