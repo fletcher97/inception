@@ -3,7 +3,7 @@ FROM alpine:3.17
 ARG WP_CLI_DL
 
 # Download programs
-RUN apk update && apk add --no-cache php81 php81-fpm php81-phar php81-openssl php81-mysqli php81-iconv mariadb-client
+RUN apk update && apk add --no-cache php81 php81-fpm php81-phar php81-openssl php81-mysqli php81-iconv php81-tokenizer mariadb-client
 
 RUN mkdir -p /run/php
 

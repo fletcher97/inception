@@ -56,6 +56,7 @@ services:
       - WP_EMAIL
     depends_on:
       - mariadb
+      - redis
     volumes:
       - wp_content:/var/www/html/wordpress
     networks:
@@ -73,6 +74,17 @@ services:
       - mariadb
     volumes:
       - adminer_content:/var/www/html/adminer
+    networks:
+      - fltnet
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    build:
+      context: requirements/redis
+    volumes:
+      - wp_content:/var/www/html/wordpress:Z
     networks:
       - fltnet
 
@@ -120,7 +132,6 @@ volumes:
       type: none
       o: bind
       device: /home/fletcher/data/adminer_content
-
 
 networks:
   fltnet:
