@@ -110,28 +110,28 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/fletcher/data/portainer_data
+      device: /home/mgueifao/data/portainer_data
   wp_db:
     name: wp_db
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/fletcher/data/wp_db
+      device: /home/mgueifao/data/wp_db
   wp_content:
     name: wp_content
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/fletcher/data/wp_content
+      device: /home/mgueifao/data/wp_content
   adminer_content:
     name: adminer_content
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/fletcher/data/adminer_content
+      device: /home/mgueifao/data/adminer_content
 
 networks:
   fltnet:
